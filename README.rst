@@ -5,6 +5,11 @@ Freely hosted in `HTTP <http://httpbin.org>`__,
 `HTTPS <https://httpbin.org>`__ & `EU <http://eu.httpbin.org/>`__
 flavors by `Runscope <https://www.runscope.com/>`__
 
+|Deploy|_
+
+.. |Deploy| image:: https://www.herokucdn.com/deploy/button.svg
+.. _Deploy: https://heroku.com/deploy?template=https://github.com/runscope/httpbin
+
 |Build Status|
 
 ENDPOINTS
@@ -194,6 +199,7 @@ Or run it directly:
 Changelog
 ---------
 
+-  0.4.0: New /image/svg endpoint, add deploy to heroku button, add 406 response to /image, and don't always emit the transfer-encoding header for stream endpoint.
 -  0.3.0: A number of new features, including a /range endpoint, lots of
    bugfixes, and a /encoding/utf8 endpoint
 -  0.2.0: Added an XML endpoint. Also fixes several bugs with unicode,
