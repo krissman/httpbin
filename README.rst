@@ -40,8 +40,8 @@ Endpoint                                 Description
 `/basic-auth/:user/:passwd`_             Challenges HTTPBasic Auth.
 `/hidden-basic-auth/:user/:passwd`_      404'd BasicAuth.
 `/digest-auth/:qop/:user/:passwd`_       Challenges HTTP Digest Auth.
-`/stream/:n`_                            Streams *n* – 100 lines.
-`/delay/:n`_                             Delays responding for *n* – 10 seconds.
+`/stream/:n`_                            Streams *n* - 100 lines.
+`/delay/:n`_                             Delays responding for *n* - 10 seconds.
 `/drip`_                                 Drips data over a duration after an optional initial delay, then (optionally) returns with the given status code.
 `/range/:n`_                             Streams *n* bytes, and allows specifying a *Range* header to select a subset of the data. Accepts a *chunk\_size* and request *duration* parameter.
 `/html`_                                 Renders an HTML Page.
@@ -194,11 +194,11 @@ Or run it directly:
 
 .. code:: bash
 
-    $ python -m httpbin.core
+    $ python -m httpbin.core [--port=PORT] [--host=HOST]
 
 Changelog
 ---------
-
+-  0.4.1: Added floating-point support for /delay endpoint
 -  0.4.0: New /image/svg endpoint, add deploy to heroku button, add 406 response to /image, and don't always emit the transfer-encoding header for stream endpoint.
 -  0.3.0: A number of new features, including a /range endpoint, lots of
    bugfixes, and a /encoding/utf8 endpoint

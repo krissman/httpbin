@@ -13,6 +13,7 @@ import os
 import random
 import time
 import uuid
+import argparse
 
 from flask import Flask, Response, request, render_template, redirect, jsonify as flask_jsonify, make_response, url_for
 from werkzeug.datastructures import WWWAuthenticate, MultiDict
@@ -288,13 +289,13 @@ def stream_n_messages(n):
 def view_status_code(codes):
     """Return status code or random status code if more than one are given"""
 
-    if not ',' in codes:
+    if ',' not in codes:
         code = int(codes)
         return status_code(code)
 
     choices = []
     for choice in codes.split(','):
-        if not ':' in choice:
+        if ':' not in choice:
             code = choice
             weight = 1
         else:
@@ -412,7 +413,7 @@ def digest_auth(qop=None, user='user', passwd='passwd'):
         qop = None
     if 'Authorization' not in request.headers or  \
                        not check_digest_auth(user, passwd) or \
-                       not 'Cookie' in request.headers:
+                       'Cookie' not in request.headers:
         response = app.make_response('')
         response.status_code = 401
 
@@ -438,15 +439,16 @@ def digest_auth(qop=None, user='user', passwd='passwd'):
     return jsonify(authenticated=True, user=user)
 
 
-@app.route('/delay/<int:delay>')
+@app.route('/delay/<delay>')
 def delay_response(delay):
     """Returns a delayed response"""
-    delay = min(delay, 10)
+    delay = min(float(delay), 10)
 
     time.sleep(delay)
 
     return jsonify(get_dict(
         'url', 'args', 'form', 'data', 'origin', 'headers', 'files'))
+
 
 @app.route('/drip')
 def drip():
@@ -708,4 +710,8 @@ def xml():
 
 
 if __name__ == '__main__':
-    app.run()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--port", type=int, default=5000)
+    parser.add_argument("--host", default="127.0.0.1")
+    args = parser.parse_args()
+    app.run(port=args.port, host=args.host)
